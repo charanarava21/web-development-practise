@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Courses Offered</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    /* Reset and base */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    :root {
+      --primary-gradient: linear-gradient(135deg, #ffffff 0%, #f5e6d3 25%, #ffb3ba 50%, #d3d3d3 75%, #ffffff 100%);
+      --secondary-gradient: linear-gradient(135deg, #f0f8ff 0%, #ffe4e1 50%, #f5f5f5 100%);
+      --accent-gradient: linear-gradient(135deg, #ffb3ba 0%, #ffdfba 100%);
+      --success-gradient: linear-gradient(135deg, #e6f3ff 0%, #f0f8ff 100%);
+      --warning-gradient: linear-gradient(135deg, #fff8dc 0%, #ffe4e1 100%);
+      --glass-bg: rgba(255, 255, 255, 0.25);
+      --glass-border: rgba(255, 255, 255, 0.4);
+      --text-primary: #000000;
+      --text-secondary: #000000;
+      --shadow-light: 0 8px 32px rgba(255, 182, 193, 0.3);
+      --shadow-heavy: 0 20px 60px rgba(0, 0, 0, 0.15);
+      --navbar-bg: rgba(255, 255, 255, 0.9);
+      --navbar-border: rgba(255, 182, 193, 0.3);
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--primary-gradient);
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      margin: 0;
+      padding: 0;
+      animation: backgroundColorCycle 8s ease-in-out infinite;
+    }
+    
+    /* Beautiful background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(255, 182, 193, 0.3) 0%, transparent 60%),
+        radial-gradient(circle at 80% 20%, rgba(255, 223, 186, 0.3) 0%, transparent 60%),
+        radial-gradient(circle at 40% 40%, rgba(245, 230, 211, 0.4) 0%, transparent 60%),
+        radial-gradient(circle at 60% 60%, rgba(211, 211, 211, 0.2) 0%, transparent 60%),
+        radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.3) 0%, transparent 60%);
+      z-index: -1;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(45deg, rgba(255, 255, 255, 0.2) 0%, transparent 50%),
+        linear-gradient(-45deg, rgba(255, 182, 193, 0.1) 0%, transparent 50%);
+      z-index: -1;
+    }
+    
+
+    /* Main Container */
+    .main-container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    /* Navbar */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 70px;
+      background: var(--navbar-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--navbar-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 30px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      z-index: 10000;
+    }
+
+    nav .logo {
+      font-weight: 900;
+      font-size: 1.6rem;
+      color: #000000;
+      user-select: none;
+      letter-spacing: 1px;
+      cursor: default;
+    }
+
+    nav .logo img {
+      height: 65px;
+      width: auto;
+      max-width: 250px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      margin: 0;
+      padding: 0;
+      align-items: center;
+    }
+
+    nav ul li {
+      position: relative;
+    }
+
+    nav ul li a {
+      color: #000000;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 10px 18px;
+      border-radius: 20px;
+      transition: all 0.2s ease;
+    }
+
+    nav ul li a:hover,
+    nav ul li a:focus {
+      color: #000000;
+      background: rgba(255, 182, 193, 0.1);
+      outline: none;
+    }
+
+
+    /* Hero Section */
+    .hero {
+      margin-top: 70px;
+      width: 100%;
+      max-width: 1400px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 80px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 80vh;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 30% 20%, rgba(255, 182, 193, 0.3) 0%, transparent 60%),
+        radial-gradient(circle at 70% 80%, rgba(255, 223, 186, 0.3) 0%, transparent 60%),
+        radial-gradient(circle at 50% 50%, rgba(245, 230, 211, 0.2) 0%, transparent 60%),
+        radial-gradient(circle at 20% 60%, rgba(211, 211, 211, 0.2) 0%, transparent 60%);
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-content h1 {
+      font-size: 4.5rem;
+      margin-bottom: 30px;
+      font-weight: 900;
+      color: #000000;
+      user-select: none;
+      position: relative;
+    }
+
+    .hero-content h1::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: var(--accent-gradient);
+      border-radius: 2px;
+    }
+
+    .hero-content p {
+      font-size: 1.8rem;
+      font-weight: 400;
+      line-height: 1.6;
+      color: #000000;
+      user-select: none;
+      margin-bottom: 40px;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      padding: 18px 40px;
+      background: var(--accent-gradient);
+      color: #000000;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(255, 182, 193, 0.3);
+    }
+
+    .hero-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 35px rgba(255, 182, 193, 0.4);
+    }
+
+
+    /* Courses Grid */
+    .grid {
+      margin: 60px auto;
+      width: 100%;
+      max-width: 1400px;
+      padding: 0 40px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 40px;
+      animation: gridEntrance 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      opacity: 0;
+      animation-delay: 0.8s;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card {
+      background: var(--glass-bg);
+      border-radius: 30px;
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border: 1px solid var(--glass-border);
+      cursor: pointer;
+      padding: 40px 30px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transform-style: preserve-3d;
+      perspective: 1000px;
+      animation: cardEntrance 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      opacity: 0;
+      box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.15),
+        0 8px 20px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+    }
+
+    .card:nth-child(1) { animation-delay: 0.2s; }
+    .card:nth-child(2) { animation-delay: 0.4s; }
+    .card:nth-child(3) { animation-delay: 0.6s; }
+    .card:nth-child(4) { animation-delay: 0.8s; }
+    .card:nth-child(5) { animation-delay: 1.0s; }
+    .card:nth-child(6) { animation-delay: 1.2s; }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.1) 0%, 
+        rgba(255, 255, 255, 0.05) 50%, 
+        rgba(255, 255, 255, 0.1) 100%);
+      border-radius: 30px;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+      z-index: 1;
+    }
+
+    .card::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(from 0deg, transparent, rgba(255, 182, 193, 0.1), transparent);
+      animation: cardRotate 8s linear infinite;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+      z-index: 0;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card:hover::after {
+      opacity: 1;
+    }
+
+    .card:hover {
+      transform: translateY(-30px) rotateX(5deg) rotateY(5deg) scale(1.05);
+      box-shadow: 
+        0 40px 80px rgba(0, 0, 0, 0.15),
+        0 20px 40px rgba(255, 182, 193, 0.2),
+        0 0 60px rgba(255, 182, 193, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+      border-color: rgba(255, 182, 193, 0.4);
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .card:active {
+      transform: translateY(-25px) rotateX(2deg) rotateY(2deg) scale(1.02);
+    }
+
+    .card-icon {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 30px;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+      transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      z-index: 2;
+      position: relative;
+      animation: iconFloat 4s ease-in-out infinite;
+    }
+
+    .card:hover .card-icon {
+      transform: scale(1.2) rotate(10deg) translateY(-10px);
+      filter: drop-shadow(0 20px 40px rgba(255, 182, 193, 0.4));
+    }
+
+    .card h2 {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      font-weight: 800;
+      color: #000000;
+      z-index: 2;
+      position: relative;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: all 0.4s ease;
+    }
+
+    .card:hover h2 {
+      color: #000000;
+      transform: translateY(-5px);
+    }
+
+    .card p {
+      font-size: 1.1rem;
+      color: #000000;
+      margin-top: auto;
+      z-index: 2;
+      position: relative;
+      line-height: 1.7;
+      transition: all 0.4s ease;
+      font-weight: 400;
+    }
+
+    .card:hover p {
+      color: #000000;
+      transform: translateY(-3px);
+    }
+
+    .card-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, #ffb3ba 0%, #ffdfba 50%, #d3d3d3 100%);
+      color: #000000;
+      padding: 8px 16px;
+      border-radius: 25px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      box-shadow: 0 8px 20px rgba(255, 182, 193, 0.3);
+      animation: badgePulse 3s ease-in-out infinite;
+      z-index: 3;
+      letter-spacing: 0.5px;
+    }
+
+    .card-progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 0 0 30px 30px;
+      overflow: hidden;
+    }
+
+    .card-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #ffb3ba 0%, #ffdfba 50%, #d3d3d3 100%);
+      width: 0%;
+      transition: width 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      border-radius: 0 0 30px 30px;
+      position: relative;
+    }
+
+    .card-progress-bar::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      animation: progressShimmer 2s ease-in-out infinite;
+    }
+
+    .card:hover .card-progress-bar {
+      width: 100%;
+    }
+
+    .card-stats {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: 20px;
+      z-index: 2;
+      position: relative;
+    }
+
+    .stat {
+      text-align: center;
+      flex: 1;
+    }
+
+    .stat-number {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #000000;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: #000000;
+      font-weight: 500;
+      margin-top: 5px;
+    }
+
+    /* Explore Now Button */
+    .explore-btn {
+      background: var(--accent-gradient);
+      color: #000000;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 25px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      box-shadow: 0 8px 20px rgba(255, 182, 193, 0.3);
+      margin-top: 20px;
+      position: relative;
+      z-index: 2;
+      text-transform: uppercase;
+      outline: none;
+    }
+
+    .explore-btn:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 12px 30px rgba(255, 182, 193, 0.5);
+      background: linear-gradient(135deg, #ffdfba 0%, #ffb3ba 100%);
+    }
+
+    .explore-btn:active {
+      transform: translateY(-1px) scale(1.02);
+      transition: all 0.1s ease;
+    }
+
+    .explore-btn:focus {
+      outline: 3px solid rgba(255, 182, 193, 0.6);
+      outline-offset: 2px;
+    }
+
+    @keyframes gridEntrance {
+      0% {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes cardEntrance {
+      0% {
+        opacity: 0;
+        transform: translateY(100px) rotateX(20deg) scale(0.8);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) rotateX(0deg) scale(1);
+      }
+    }
+
+    @keyframes cardRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes iconFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes badgePulse {
+      0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 8px 20px rgba(255, 182, 193, 0.3);
+      }
+      50% { 
+      transform: scale(1.1);
+        box-shadow: 0 12px 30px rgba(255, 182, 193, 0.5);
+      }
+    }
+
+    @keyframes progressShimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    @keyframes backgroundColorCycle {
+      0% { 
+        background: linear-gradient(135deg, #ffffff 0%, #f5e6d3 25%, #ffb3ba 50%, #d3d3d3 75%, #ffffff 100%);
+      }
+      20% { 
+        background: linear-gradient(135deg, #f5e6d3 0%, #ffb3ba 25%, #d3d3d3 50%, #ffffff 75%, #f5e6d3 100%);
+      }
+      40% { 
+        background: linear-gradient(135deg, #ffb3ba 0%, #d3d3d3 25%, #ffffff 50%, #f5e6d3 75%, #ffb3ba 100%);
+      }
+      60% { 
+        background: linear-gradient(135deg, #d3d3d3 0%, #ffffff 25%, #f5e6d3 50%, #ffb3ba 75%, #d3d3d3 100%);
+      }
+      80% { 
+        background: linear-gradient(135deg, #ffffff 0%, #f5e6d3 25%, #ffb3ba 50%, #d3d3d3 75%, #ffffff 100%);
+      }
+      100% { 
+        background: linear-gradient(135deg, #ffffff 0%, #f5e6d3 25%, #ffb3ba 50%, #d3d3d3 75%, #ffffff 100%);
+      }
+    }
+
+    /* Ripple effect container */
+    .card .ripple {
+      position: absolute;
+      border-radius: 50%;
+      transform: scale(0);
+      animation: ripple 0.6s linear;
+      background-color: rgba(244, 67, 54, 0.4);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes ripple {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(255, 255, 255, 0.9);
+      color: #000000;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto 20px;
+      border-radius: 15px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      user-select: none;
+    }
+
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      padding: 30px 40px;
+      gap: 30px;
+    }
+
+    .footer-about,
+    .footer-links,
+    .footer-contact {
+      flex: 1 1 250px;
+      min-width: 250px;
+    }
+
+    .footer-about h3,
+    .footer-links h4,
+    .footer-contact h4 {
+      color: #000000;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    .footer-about p,
+    .footer-contact p {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: #000000;
+    }
+
+    .footer-links ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-links ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-links ul li a {
+      color: #000000;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links ul li a:hover,
+    .footer-links ul li a:focus {
+      color: #000000;
+      outline: none;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding: 15px 20px;
+      font-size: 14px;
+      color: #000000;
+      border-top: 1px solid rgba(255,182,193,0.2);
+      user-select: none;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1200px) {
+      .grid {
+        max-width: 900px;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        height: 60px;
+        padding: 0 20px;
+      }
+      
+      nav .logo {
+        font-size: 1.4rem;
+      }
+      
+      nav .logo img {
+        height: 55px;
+        max-width: 220px;
+      }
+      
+      nav ul {
+        gap: 15px;
+      }
+      
+      nav ul li a {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+      }
+      
+      .hero {
+        margin-top: 60px;
+        padding: 60px 20px;
+        min-height: 70vh;
+      }
+      
+      .hero-content h1 {
+        font-size: 3rem;
+      }
+      
+      .hero-content p {
+        font-size: 1.4rem;
+      }
+      
+      .grid {
+        margin: 40px auto;
+        padding: 0 20px;
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .grid {
+        max-width: 600px;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin: 40px 15px 60px;
+      }
+      
+      .card {
+        padding: 30px 20px;
+      }
+      
+      .card h2 {
+        font-size: 1.7rem;
+      }
+      
+      .card p {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .footer-container {
+        flex-direction: column;
+        padding: 20px 25px;
+      }
+      
+      .grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin: 30px 10px 50px;
+      }
+      
+      .card {
+        padding: 25px 20px;
+        margin-bottom: 10px;
+      }
+      
+      .card-icon {
+        width: 70px;
+        height: 70px;
+        margin-bottom: 20px;
+      }
+      
+      .card h2 {
+        font-size: 1.6rem;
+        margin-bottom: 12px;
+      }
+      
+      .card p {
+        font-size: 0.95rem;
+        line-height: 1.5;
+      }
+      
+      .card-badge {
+        font-size: 0.75rem;
+        padding: 4px 10px;
+        top: 12px;
+        right: 12px;
+      }
+      
+      .explore-btn {
+        padding: 10px 20px;
+        font-size: 0.85rem;
+        margin-top: 15px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+      .hero-content p {
+        font-size: 1.2rem;
+      }
+      nav ul {
+        gap: 15px;
+      }
+      nav ul li a {
+        font-size: 0.9rem;
+        padding: 6px 10px;
+      }
+      
+      .grid {
+        margin: 25px 5px 40px;
+      }
+      
+      .card {
+        padding: 20px 15px;
+        border-radius: 20px;
+      }
+      
+      .card-icon {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 15px;
+      }
+      
+      .card h2 {
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+      }
+      
+      .card p {
+        font-size: 0.9rem;
+      }
+      
+      .card-badge {
+        font-size: 0.7rem;
+        padding: 3px 8px;
+        top: 10px;
+        right: 10px;
+      }
+      
+      .explore-btn {
+        padding: 8px 16px;
+        font-size: 0.8rem;
+        margin-top: 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        padding: 40px 15px 60px;
+        margin-top: 50px;
+      }
+      
+      .hero-content h1 {
+        font-size: 2rem;
+        margin-bottom: 15px;
+      }
+      
+      .hero-content p {
+        font-size: 1rem;
+      }
+      
+      nav {
+        height: 50px;
+        padding: 0 20px;
+      }
+      
+      nav .logo {
+        font-size: 1.3rem;
+      }
+      
+      nav .logo img {
+        height: 45px;
+        max-width: 180px;
+      }
+      
+      nav ul {
+        gap: 10px;
+      }
+      
+      nav ul li a {
+        font-size: 0.8rem;
+        padding: 5px 8px;
+      }
+      
+      .grid {
+        margin: 20px 5px 30px;
+        gap: 15px;
+      }
+      
+      .card {
+        padding: 18px 12px;
+        border-radius: 18px;
+      }
+      
+      .card-icon {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 12px;
+      }
+      
+      .card h2 {
+        font-size: 1.2rem;
+        margin-bottom: 8px;
+      }
+      
+      .card p {
+        font-size: 0.85rem;
+        line-height: 1.4;
+      }
+      
+      .card-badge {
+        font-size: 0.65rem;
+        padding: 2px 6px;
+        top: 8px;
+        right: 8px;
+      }
+      
+      .explore-btn {
+        padding: 6px 12px;
+        font-size: 0.75rem;
+        margin-top: 10px;
+        border-radius: 20px;
+      }
+    }
+
+    /* Touch device optimizations */
+    @media (hover: none) and (pointer: coarse) {
+      .card:hover {
+        transform: none;
+        box-shadow: 
+          0 15px 35px rgba(0, 0, 0, 0.1),
+          0 5px 15px rgba(0, 0, 0, 0.07),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      }
+      
+      .card:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
+      }
+      
+      .card:hover .card-icon {
+        transform: scale(1.05);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="logo"><img src="C:\Users\gamer\Downloads\logo-removebg-preview.png"></div>
+    <ul>
+      <li><a href="index.html" tabindex="1">Home</a></li>
+      <li><a href="aiselect.html" tabindex="2">AI Mode</a></li>
+      <li><a href="ac.html" tabindex="3">Contact</a></li>
+      <li><a href="at.html" tabindex="4">Account</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Content Container -->
+  <main class="main-container">
+  <!-- Hero Section -->
+  <section class="hero" aria-label="Inspirational quote and image">
+    <div class="hero-content">
+      <h1>Unlock Your Future with Knowledge</h1>
+      <p>"Education is the most powerful weapon which you can use to change the world." – Nelson Mandela</p>
+        <a href="#courses" class="hero-cta">Explore Courses</a>
+    </div>
+  </section>
+
+  <!-- Courses Grid -->
+    <section id="courses" class="grid" aria-label="Courses offered">
+    <div class="card" role="button" tabindex="5" aria-pressed="false" data-href="inter.html">
+      <div class="card-badge">Popular</div>
+      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=200&h=200&fit=crop&crop=center" alt="Intermediate Courses" class="card-icon" />
+      <h2>Intermediate</h2>
+      <p>Explore MPC, BIPC, CEC, and more comprehensive courses designed for academic excellence.</p>
+      <div class="card-stats">
+        <div class="stat">
+          <div class="stat-number">500+</div>
+          <div class="stat-label">Students</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">95%</div>
+          <div class="stat-label">Success</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">4.8</div>
+          <div class="stat-label">Rating</div>
+        </div>
+      </div>
+      <div class="card-progress">
+        <div class="card-progress-bar"></div>
+      </div>
+      <button class="explore-btn" onclick="window.location.href='inter.html'"><a href="inter.html">Explore Now</a></button>
+    </div>
+
+    <div class="card" role="button" tabindex="6" aria-pressed="false" data-href="diploma.html">
+      <div class="card-badge">New</div>
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=center" alt="Diploma Courses" class="card-icon" />
+      <h2>Diploma</h2>
+      <p>Technical and professional diploma courses for career advancement and skill development.</p>
+      <div class="card-stats">
+        <div class="stat">
+          <div class="stat-number">300+</div>
+          <div class="stat-label">Students</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">90%</div>
+          <div class="stat-label">Success</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">4.6</div>
+          <div class="stat-label">Rating</div>
+        </div>
+      </div>
+      <div class="card-progress">
+        <div class="card-progress-bar"></div>
+      </div>
+      <button class="explore-btn" onclick="window.location.href='diploma.html'"><a href="diploma.html">Explore Now</a></button>
+    </div>
+
+    <div class="card" role="button" tabindex="7" aria-pressed="false" data-href="degree.html">
+      <div class="card-badge">Featured</div>
+      <img src="D:\images\4451a2ff05d2d766a939ad44182b1501.jpg" alt="Degree Courses" class="card-icon" />
+      <h2>Degree</h2>
+      <p>BA, BSc, BCom, BBA and other comprehensive degree programs for higher education.</p>
+      <div class="card-stats">
+        <div class="stat">
+          <div class="stat-number">800+</div>
+          <div class="stat-label">Students</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">98%</div>
+          <div class="stat-label">Success</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">4.9</div>
+          <div class="stat-label">Rating</div>
+        </div>
+      </div>
+      <div class="card-progress">
+        <div class="card-progress-bar"></div>
+      </div>
+      <button class="explore-btn" onclick="window.location.href='degree.html'"><a href="degree.html">Explore Now</a></button>
+    </div>
+
+    <div class="card" role="button" tabindex="8" aria-pressed="false" data-href="btech.html">
+      <div class="card-badge">Hot</div>
+      <img src="D:\images\teamwork-in-engineering-stockcake.jpg" alt="Engineering Courses" class="card-icon" />
+      <h2>Engineering (BTECH)</h2>
+      <p>Computer Science, Mechanical, Civil & more engineering specializations for tech careers.</p>
+      <div class="card-stats">
+        <div class="stat">
+          <div class="stat-number">1200+</div>
+          <div class="stat-label">Students</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">92%</div>
+          <div class="stat-label">Success</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">4.7</div>
+          <div class="stat-label">Rating</div>
+        </div>
+      </div>
+      <div class="card-progress">
+        <div class="card-progress-bar"></div>
+      </div>
+      <button class="explore-btn" onclick="window.location.href='btech.html'"><a href="btech.html">Explore Now</a></button>
+    </div>
+
+    <div class="card" role="button" tabindex="9" aria-pressed="false" data-href="life-skills.html">
+      <div class="card-badge">Essential</div>
+      <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=200&h=200&fit=crop&crop=center" alt="Life Skills Courses" class="card-icon" />
+      <h2>Life Skills</h2>
+      <p>Develop essential skills for personal and professional success in today's world.</p>
+      <div class="card-stats">
+        <div class="stat">
+          <div class="stat-number">400+</div>
+          <div class="stat-label">Students</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">88%</div>
+          <div class="stat-label">Success</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">4.5</div>
+          <div class="stat-label">Rating</div>
+        </div>
+      </div>
+      <div class="card-progress">
+        <div class="card-progress-bar"></div>
+      </div>
+      <button class="explore-btn" onclick="window.location.href='life-skills.html'"><a href="Lifeskills.html">Explore Now</a></button>
+    </div>
+
+    <div class="card" role="button" tabindex="10" aria-pressed="false" data-href="personal-social-skills.html">
+      <div class="card-badge">Trending</div>
+      <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=200&h=200&fit=crop&crop=center" alt="Personal Social Skills Courses" class="card-icon" />
+      <h2>Personal & Social Skills</h2>
+      <p>Enhance communication, teamwork, and emotional intelligence for better relationships.</p>
+      <div class="card-stats">
+        <div class="stat">
+          <div class="stat-number">350+</div>
+          <div class="stat-label">Students</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">85%</div>
+          <div class="stat-label">Success</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">4.4</div>
+          <div class="stat-label">Rating</div>
+        </div>
+      </div>
+      <div class="card-progress">
+        <div class="card-progress-bar"></div>
+      </div>
+      <button class="explore-btn" onclick="window.location.href='personal-social-skills.html'"><a href="personal.html">Explore Now</a></button>
+    </div>
+  </section>
+  </main>
+
+  <script>
+    // Advanced 3D Card Interactions with Stunning Animations
+    document.querySelectorAll('.card').forEach((card, index) => {
+      let isHovering = false;
+      let mouseX = 0;
+      let mouseY = 0;
+      
+      // Enhanced mouse enter with 3D effects
+      card.addEventListener('mouseenter', function(e) {
+        isHovering = true;
+        
+        // Animate progress bar with shimmer effect
+        const progressBar = this.querySelector('.card-progress-bar');
+        if (progressBar) {
+          progressBar.style.width = '100%';
+          progressBar.style.animation = 'progressShimmer 2s ease-in-out infinite';
+        }
+        
+        // Animate stats with counter effect
+        const statNumbers = this.querySelectorAll('.stat-number');
+        statNumbers.forEach(stat => {
+          const finalValue = stat.textContent;
+          const isPercentage = finalValue.includes('%');
+          const isDecimal = finalValue.includes('.');
+          const numericValue = parseFloat(finalValue.replace(/[^\d.]/g, ''));
+          
+          let currentValue = 0;
+          const increment = numericValue / 30;
+          const timer = setInterval(() => {
+            currentValue += increment;
+            if (currentValue >= numericValue) {
+              currentValue = numericValue;
+              clearInterval(timer);
+            }
+            
+            if (isPercentage) {
+              stat.textContent = Math.round(currentValue) + '%';
+            } else if (isDecimal) {
+              stat.textContent = currentValue.toFixed(1);
+            } else {
+              stat.textContent = Math.round(currentValue) + '+';
+            }
+          }, 50);
+        });
+        
+        // Add magnetic effect
+        this.addEventListener('mousemove', handleMouseMove);
+      });
+
+      // Enhanced mouse leave
+      card.addEventListener('mouseleave', function() {
+        isHovering = false;
+        this.removeEventListener('mousemove', handleMouseMove);
+        
+        // Reset progress bar
+        const progressBar = this.querySelector('.card-progress-bar');
+        if (progressBar) {
+          progressBar.style.width = '0%';
+          progressBar.style.animation = 'none';
+        }
+        
+        // Reset transform
+        this.style.transform = 'translateY(0) rotateX(0) rotateY(0) scale(1)';
+      });
+
+      // Magnetic mouse movement effect
+      function handleMouseMove(e) {
+        if (!isHovering) return;
+        
+        const rect = card.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        
+        mouseX = (e.clientX - centerX) / 10;
+        mouseY = (e.clientY - centerY) / 10;
+        
+        card.style.transform = `translateY(-30px) rotateX(${-mouseY}deg) rotateY(${mouseX}deg) scale(1.05)`;
+      }
+
+      // Enhanced click with morphing effect
+      card.addEventListener('click', function(e) {
+        // Create morphing ripple effect
+        const ripple = document.createElement('div');
+        ripple.style.cssText = `
+          position: absolute;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(255, 182, 193, 0.4) 0%, rgba(255, 223, 186, 0.2) 50%, transparent 70%);
+          pointer-events: none;
+          z-index: 10;
+          transform: scale(0);
+          animation: morphRipple 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        `;
+        
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height) * 2;
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = (e.clientX - rect.left - size/2) + 'px';
+        ripple.style.top = (e.clientY - rect.top - size/2) + 'px';
+        
+        this.appendChild(ripple);
+
+        // Remove ripple after animation
+        setTimeout(() => ripple.remove(), 1200);
+        
+        // Morphing click animation
+        this.style.transition = 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+        this.style.transform = 'translateY(-25px) rotateX(10deg) rotateY(10deg) scale(0.95)';
+        this.style.filter = 'brightness(1.2) saturate(1.2)';
+        
+        // Add particle burst effect
+        createParticleBurst(e.clientX, e.clientY);
+        
+        // Delay navigation
+        const href = this.getAttribute('data-href');
+        if(href) {
+          setTimeout(() => {
+            window.location.href = href;
+          }, 600);
+        }
+      });
+
+      // Keyboard accessibility
+      card.addEventListener('keydown', function(e) {
+        if(e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.click();
+        }
+      });
+
+      // Focus effects
+      card.addEventListener('focus', function() {
+        this.style.outline = '3px solid rgba(255, 182, 193, 0.6)';
+        this.style.outlineOffset = '3px';
+        this.style.boxShadow = '0 0 0 6px rgba(255, 182, 193, 0.2)';
+      });
+
+      card.addEventListener('blur', function() {
+        this.style.outline = 'none';
+        this.style.boxShadow = '';
+      });
+    });
+
+    // Particle burst effect
+    function createParticleBurst(x, y) {
+      const particleCount = 12;
+      const colors = ['#ffb3ba', '#ffdfba', '#f5e6d3', '#d3d3d3'];
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        const angle = (i / particleCount) * Math.PI * 2;
+        const velocity = 100 + Math.random() * 100;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        
+        particle.style.cssText = `
+          position: fixed;
+          width: 6px;
+          height: 6px;
+          background: ${color};
+          border-radius: 50%;
+          pointer-events: none;
+          z-index: 1000;
+          left: ${x}px;
+          top: ${y}px;
+          box-shadow: 0 0 10px ${color};
+        `;
+        
+        document.body.appendChild(particle);
+        
+        // Animate particle
+        const animation = particle.animate([
+          {
+            transform: 'translate(0, 0) scale(1)',
+            opacity: 1
+          },
+          {
+            transform: `translate(${Math.cos(angle) * velocity}px, ${Math.sin(angle) * velocity}px) scale(0)`,
+            opacity: 0
+          }
+        ], {
+          duration: 1000,
+          easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+        });
+        
+        animation.onfinish = () => particle.remove();
+      }
+    }
+
+    // Advanced floating particles with physics
+    function createAdvancedParticles() {
+      const particleCount = 30;
+      const particles = [];
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        const size = Math.random() * 4 + 2;
+        const color = `hsl(${Math.random() * 60 + 300}, 70%, 80%)`;
+        
+        particle.style.cssText = `
+          position: fixed;
+          width: ${size}px;
+          height: ${size}px;
+          background: ${color};
+          border-radius: 50%;
+          pointer-events: none;
+          z-index: 1;
+          left: ${Math.random() * 100}vw;
+          top: ${Math.random() * 100}vh;
+          box-shadow: 0 0 ${size * 2}px ${color};
+        `;
+        
+        document.body.appendChild(particle);
+        particles.push({
+          element: particle,
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+          vx: (Math.random() - 0.5) * 0.5,
+          vy: (Math.random() - 0.5) * 0.5,
+          size: size
+        });
+      }
+      
+      // Animate particles
+      function animateParticles() {
+        particles.forEach(particle => {
+          particle.x += particle.vx;
+          particle.y += particle.vy;
+          
+          // Bounce off edges
+          if (particle.x < 0 || particle.x > window.innerWidth) particle.vx *= -1;
+          if (particle.y < 0 || particle.y > window.innerHeight) particle.vy *= -1;
+          
+          // Keep in bounds
+          particle.x = Math.max(0, Math.min(window.innerWidth, particle.x));
+          particle.y = Math.max(0, Math.min(window.innerHeight, particle.y));
+          
+          particle.element.style.left = particle.x + 'px';
+          particle.element.style.top = particle.y + 'px';
+        });
+        
+        requestAnimationFrame(animateParticles);
+      }
+      
+      animateParticles();
+    }
+
+    // Add morphing ripple animation
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes morphRipple {
+        0% {
+          transform: scale(0) rotate(0deg);
+          opacity: 1;
+        }
+        50% {
+          transform: scale(1) rotate(180deg);
+          opacity: 0.8;
+        }
+        100% {
+          transform: scale(2) rotate(360deg);
+          opacity: 0;
+        }
+      }
+      
+      @keyframes progressShimmer {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Initialize effects
+    createAdvancedParticles();
+
+
+    // Smooth scroll for CTA button
+    document.querySelector('.hero-cta')?.addEventListener('click', function(e) {
+      e.preventDefault();
+      document.querySelector('#courses')?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    });
+
+    // Intersection Observer for advanced animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationPlayState = 'running';
+          entry.target.classList.add('animate');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all cards
+    document.querySelectorAll('.card').forEach(card => {
+      observer.observe(card);
+    });
+  </script>
+
+</body>
+</html>

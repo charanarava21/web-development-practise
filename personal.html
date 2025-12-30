@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Personal and Social Skills</title>
+  <style>
+     /* Navbar */
+     nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 70px;
+      background: var(--navbar-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--navbar-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 30px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      z-index: 10000;
+    }
+
+    nav .logo {
+      font-weight: 900;
+      font-size: 1.6rem;
+      color: #000000;
+      user-select: none;
+      letter-spacing: 1px;
+      cursor: default;
+    }
+
+    nav .logo img {
+      height: 65px;
+      width: auto;
+      max-width: 250px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      margin: 0;
+      padding: 0;
+      align-items: center;
+    }
+
+    nav ul li {
+      position: relative;
+    }
+
+    nav ul li a {
+      color: #000000;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 10px 18px;
+      border-radius: 20px;
+      transition: all 0.2s ease;
+    }
+
+    nav ul li a:hover,
+    nav ul li a:focus {
+      color: #000000;
+      background: rgba(255, 182, 193, 0.1);
+      outline: none;
+    }
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+      background-size: 400% 400%;
+      animation: gradientShift 12s ease infinite;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      25% { background-position: 100% 50%; }
+      50% { background-position: 100% 100%; }
+      75% { background-position: 0% 100%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    header {
+      font-size: 3rem;
+      margin-bottom: 40px;
+      font-weight: 700;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+      user-select: none;
+      text-align: center;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      width: 100%;
+      max-width: 1100px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      cursor: pointer;
+      padding: 30px 20px;
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      user-select: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.1));
+      animation: cardRotate 8s linear infinite;
+      opacity: 0;
+      z-index: 0;
+      border-radius: 50%;
+      transition: opacity 0.4s ease;
+    }
+
+    @keyframes cardRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .card:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .card:hover::before {
+      opacity: 0.1;
+    }
+
+    .card h2 {
+      font-size: 1.6rem;
+      margin-bottom: 15px;
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card p {
+      font-size: 1rem;
+      line-height: 1.4;
+      color: #eee;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card img {
+      width: 90px;
+      height: 90px;
+      margin-bottom: 20px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 5px rgba(255,255,255,0.7));
+      transition: transform 0.3s ease;
+      position: relative;
+      z-index: 1;
+      border-radius: 50%;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .card:hover img {
+      transform: scale(1.1) rotate(5deg);
+      border-color: rgba(255, 255, 255, 0.6);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+    }
+
+    /* Individual course image styling for distinction */
+    .card:nth-child(1) img {
+      border-color: rgba(102, 126, 234, 0.6);
+    }
+    .card:nth-child(1):hover img {
+      border-color: rgba(102, 126, 234, 0.9);
+      box-shadow: 0 0 20px rgba(102, 126, 234, 0.6);
+    }
+
+    .card:nth-child(2) img {
+      border-color: rgba(118, 75, 162, 0.6);
+    }
+    .card:nth-child(2):hover img {
+      border-color: rgba(118, 75, 162, 0.9);
+      box-shadow: 0 0 20px rgba(118, 75, 162, 0.6);
+    }
+
+    .card:nth-child(3) img {
+      border-color: rgba(240, 147, 251, 0.6);
+    }
+    .card:nth-child(3):hover img {
+      border-color: rgba(240, 147, 251, 0.9);
+      box-shadow: 0 0 20px rgba(240, 147, 251, 0.6);
+    }
+
+    .card:nth-child(4) img {
+      border-color: rgba(245, 87, 108, 0.6);
+    }
+    .card:nth-child(4):hover img {
+      border-color: rgba(245, 87, 108, 0.9);
+      box-shadow: 0 0 20px rgba(245, 87, 108, 0.6);
+    }
+
+    .card:nth-child(5) img {
+      border-color: rgba(79, 172, 254, 0.6);
+    }
+    .card:nth-child(5):hover img {
+      border-color: rgba(79, 172, 254, 0.9);
+      box-shadow: 0 0 20px rgba(79, 172, 254, 0.6);
+    }
+
+    .card:nth-child(6) img {
+      border-color: rgba(255, 193, 7, 0.6);
+    }
+    .card:nth-child(6):hover img {
+      border-color: rgba(255, 193, 7, 0.9);
+      box-shadow: 0 0 20px rgba(255, 193, 7, 0.6);
+    }
+
+    footer {
+      margin-top: 60px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+      user-select: none;
+    }
+
+    @media (max-width: 480px) {
+      header {
+        font-size: 2.2rem;
+      }
+      .card {
+        padding: 25px 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo"><img src="C:\Users\gamer\Downloads\logo-removebg-preview.png"></div>
+    <ul>
+      <li><a href="index.html" tabindex="1">Home</a></li>
+      <li><a href="aiselect.html" tabindex="2">AI Mode</a></li>
+      <li><a href="courses.html" tabindex="3">Courses</a></li>
+      <li><a href="" tabindex="4"></a></li>
+    </ul>
+  </nav>
+
+  <header> <br>Personal and Social Skills</header>
+
+  <div class="grid">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face" alt="Self Awareness" />
+      <h2>Self-Awareness</h2>
+      <p>Understanding personal strengths, weaknesses, and emotions.</p>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=200&h=200&fit=crop" alt="Communication" />
+      <h2>Effective Communication</h2>
+      <p>Expressing ideas clearly and listening actively.</p>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop" alt="Empathy" />
+      <h2>Empathy</h2>
+      <p>Recognizing and respecting others’ feelings and perspectives.</p>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=200&h=200&fit=crop" alt="Teamwork" />
+      <h2>Teamwork</h2>
+      <p>Collaborating with peers and contributing in groups.</p>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?w=200&h=200&fit=crop" alt="Conflict Resolution" />
+      <h2>Conflict Resolution</h2>
+      <p>Managing disagreements constructively and respectfully.</p>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=200&h=200&fit=crop" alt="Decision Making" />
+      <h2>Decision Making</h2>
+      <p>Making responsible and thoughtful choices in life situations.</p>
+    </div>
+  </div>
+
+  <footer>&copy; 2024 Your Institution. All rights reserved.</footer>
+
+</body>
+</html>

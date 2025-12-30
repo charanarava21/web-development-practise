@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XploreonEdu - Interactive Learning Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body, html {
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+        
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .video-background video {
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+        }
+        
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .content {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            max-width: 800px;
+            animation: fadeIn 2s ease-out;
+        }
+        
+        .welcome-text {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            opacity: 0;
+            animation: slideInDown 1s ease-out 0.5s forwards;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .learnova-text {
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            opacity: 0;
+            animation: zoomIn 1.5s ease-out 1s forwards;
+            text-shadow: 0 0 20px rgba(79, 172, 254, 0.3);
+        }
+        
+        .next-button {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 2s forwards;
+            z-index: 10;
+        }
+        
+        .next-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(45deg, #00f2fe, #4facfe);
+        }
+        
+        .next-button:active {
+            transform: translateY(0);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideInDown {
+            from { 
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes zoomIn {
+            from { 
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to { 
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            .welcome-text {
+                font-size: 1.8rem;
+            }
+            
+            .learnova-text {
+                font-size: 3.5rem;
+            }
+            
+            .next-button {
+                bottom: 20px;
+                right: 20px;
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .welcome-text {
+                font-size: 1.5rem;
+            }
+            
+            .learnova-text {
+                font-size: 2.8rem;
+            }
+            
+            .next-button {
+                bottom: 15px;
+                right: 15px;
+                padding: 10px 25px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="video-background">
+        <video autoplay muted loop playsinline>
+            <source src="C:\Users\gamer\Downloads\8198511-hd_1920_1080_25fps.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    
+    <div class="overlay">
+        <div class="content">
+            <h1 class="welcome-text">Welcome to</h1>
+            <h1 class="learnova-text">XploreonEdu</h1>
+        </div>
+    </div>
+    
+    <button class="next-button" id="nextButton"><a href="index.html">Next</a></button>
+    </body>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const nextButton = document.getElementById('nextButton');
+            
+            // Add click event to the Next button
+            nextButton.addEventListener('click', function() {
+                // Animation when clicked
+                this.style.transform = 'scale(0.95)';
+                
+                // Reset animation after a short delay
+             //   setTimeout(() => {
+              //      this.style.transform = '';
+                    // Here you would typically navigate to the next page
+              //      alert('Moving to the next section!');
+            //    }, 200);
+            });
+            
+            // Add mousemove effect for parallax-like interaction
+            document.addEventListener('mousemove', function(e) {
+                const x = (window.innerWidth - e.pageX) / 50;
+                const y = (window.innerHeight - e.pageY) / 50;
+                
+                const content = document.querySelector('.content');
+                content.style.transform = `translate(${x/5}px, ${y/5}px)`;
+                
+                const button = document.querySelector('.next-button');
+                button.style.transform = `translate(${x/20}px, ${y/20}px)`;
+            });
+        });
+    </script>
+</body>
+</html>

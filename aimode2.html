@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechBot - AI Assistant</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #0a0a1a;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Animated tech background */
+        .tech-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .circuit-line {
+            position: absolute;
+            background: rgba(25, 118, 210, 0.3);
+            animation: circuitFlow 20s linear infinite;
+        }
+        
+        .data-particle {
+            position: absolute;
+            background: rgba(0, 230, 118, 0.7);
+            border-radius: 50%;
+            animation: float 15s infinite;
+        }
+        
+        .binary-code {
+            position: absolute;
+            color: rgba(0, 230, 118, 0.3);
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            animation: fall 10s linear infinite;
+        }
+        
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(25, 118, 210, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(25, 118, 210, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            perspective: 1000px;
+        }
+        
+        @keyframes circuitFlow {
+            0% { transform: translateY(-100%) translateX(0); }
+            100% { transform: translateY(100vh) translateX(20px); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(0.5); opacity: 0; }
+            50% { transform: translate(20px, -20px) scale(1); opacity: 1; }
+        }
+        
+        @keyframes fall {
+            0% { transform: translateY(-100%); opacity: 0; }
+            5% { opacity: 1; }
+            95% { opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+        
+        .chat-container {
+            width: 90%;
+            max-width: 400px;
+            background: rgba(13, 17, 33, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(0, 230, 118, 0.3),
+                        0 0 50px rgba(25, 118, 210, 0.2);
+            display: flex;
+            flex-direction: column;
+            height: 80vh;
+            border: 1px solid rgba(25, 118, 210, 0.3);
+            position: relative;
+        }
+        
+        .chat-header {
+            background: linear-gradient(90deg, #0d1b2a, #1b263b);
+            color: #e0e0e0;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            border-bottom: 1px solid rgba(25, 118, 210, 0.3);
+        }
+        
+        .chat-header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(25, 118, 210, 0.7);
+        }
+        
+        .chat-status {
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 5px;
+            color: #00e676;
+        }
+        
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            background-color: #00e676;
+            border-radius: 50%;
+            margin-right: 8px;
+            box-shadow: 0 0 8px #00e676;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            background: rgba(10, 15, 30, 0.6);
+        }
+        
+        .message {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            line-height: 1.4;
+            position: relative;
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .bot-message {
+            align-self: flex-start;
+            background: linear-gradient(135deg, #1e3a5f, #2c5282);
+            color: #e0e0e0;
+            border-bottom-left-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .user-message {
+            align-self: flex-end;
+            background: linear-gradient(135deg, #1976d2, #64b5f6);
+            color: white;
+            border-bottom-right-radius: 4px;
+            box-shadow: 0 2px 8px rgba(25, 118, 210, 0.4);
+        }
+        
+        .typing-indicator {
+            align-self: flex-start;
+            background-color: rgba(30, 58, 95, 0.8);
+            color: #00e676;
+            padding: 12px 16px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-bottom: 8px;
+        }
+        
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            background-color: #00e676;
+            border-radius: 50%;
+            animation: typingAnimation 1.4s infinite ease-in-out;
+        }
+        
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes typingAnimation {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-5px); }
+        }
+        
+        .chat-input {
+            padding: 16px;
+            background: rgba(13, 17, 33, 0.9);
+            border-top: 1px solid rgba(25, 118, 210, 0.3);
+            display: flex;
+            gap: 10px;
+        }
+        
+        .chat-input input {
+            flex: 1;
+            padding: 12px 16px;
+            background: rgba(10, 15, 30, 0.8);
+            border: 1px solid rgba(25, 118, 210, 0.3);
+            border-radius: 24px;
+            outline: none;
+            font-size: 1rem;
+            transition: all 0.3s;
+            color: #e0e0e0;
+        }
+        
+        .chat-input input:focus {
+            border-color: #1976d2;
+            box-shadow: 0 0 8px rgba(25, 118, 210, 0.5);
+        }
+        
+        .chat-input input::placeholder {
+            color: rgba(224, 224, 224, 0.6);
+        }
+        
+        .send-button {
+            background: linear-gradient(135deg, #1976d2, #64b5f6);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 46px;
+            height: 46px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 0 10px rgba(25, 118, 210, 0.5);
+        }
+        
+        .send-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(25, 118, 210, 0.7);
+        }
+        
+        .send-button svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+        
+        .chat-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 0 16px 16px;
+            border-top: 1px solid rgba(25, 118, 210, 0.3);
+            background: rgba(13, 17, 33, 0.9);
+        }
+        
+        .suggestion-chip {
+            background: rgba(25, 118, 210, 0.2);
+            color: #64b5f6;
+            padding: 8px 16px;
+            border-radius: 16px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid rgba(25, 118, 210, 0.3);
+        }
+        
+        .suggestion-chip:hover {
+            background: rgba(25, 118, 210, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(25, 118, 210, 0.3);
+        }
+        
+        /* Responsive design */
+        @media (max-width: 480px) {
+            .chat-container {
+                height: 90vh;
+                border-radius: 12px;
+                width: 95%;
+            }
+            
+            .chat-header {
+                padding: 16px;
+            }
+            
+            .chat-messages {
+                padding: 16px;
+            }
+            
+            .message {
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Tech Background -->
+    <div class="tech-background">
+        <div class="grid-overlay"></div>
+        <!-- Circuit lines and data particles will be generated by JavaScript -->
+    </div>
+    
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1>Advanced XploreonEdu AI</h1>
+            <div class="chat-status">
+                <div class="status-indicator"></div>
+                <span>Online - Ready to Crunch</span>
+            </div>
+        </div>
+        
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot-message">
+                Hello! I'm your advanced XploreonEdu AI. How can I help you today?
+            </div>
+        </div>
+        
+        <div class="chat-suggestions">
+            <div class="suggestion-chip" onclick="sendSuggestion('What technologies do you know about?')">Tech you know?</div>
+            <div class="suggestion-chip" onclick="sendSuggestion('Tell me about AI')">Tell me about AI</div>
+            <div class="suggestion-chip" onclick="sendSuggestion('How do I code better?')">Coding tips</div>
+        </div>
+        
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Type your tech question..." onkeypress="handleKeyPress(event)">
+            <div class="send-button" onclick="sendMessage()">
+                <svg viewBox="0 0 24 24">
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const chatMessages = document.getElementById('chatMessages');
+        const userInput = document.getElementById('userInput');
+        const techBackground = document.querySelector('.tech-background');
+        
+        // Create animated tech background elements
+        function createTechBackground() {
+            // Create circuit lines
+            for (let i = 0; i < 15; i++) {
+                const line = document.createElement('div');
+                line.classList.add('circuit-line');
+                line.style.width = Math.random() * 3 + 1 + 'px';
+                line.style.height = Math.random() * 150 + 50 + 'px';
+                line.style.left = Math.random() * 100 + 'vw';
+                line.style.animationDelay = Math.random() * 20 + 's';
+                techBackground.appendChild(line);
+            }
+            
+            // Create data particles
+            for (let i = 0; i < 40; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('data-particle');
+                particle.style.width = Math.random() * 8 + 4 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.top = Math.random() * 100 + 'vh';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                techBackground.appendChild(particle);
+            }
+            
+            // Create binary code rain
+            for (let i = 0; i < 30; i++) {
+                const binary = document.createElement('div');
+                binary.classList.add('binary-code');
+                binary.textContent = Math.random() > 0.5 ? '1010' : '0101';
+                binary.style.left = Math.random() * 100 + 'vw';
+                binary.style.animationDelay = Math.random() * 10 + 's';
+                techBackground.appendChild(binary);
+            }
+        }
+        
+        // Predefined tech-related bot responses
+        const botResponses = {
+            'hello': 'Hello! How can I assist with your tech questions today?',
+            'hi': 'Hi there! I specialize in technology topics. What would you like to know?',
+            'how are you': 'I\'m running smoothly with no bugs! How can I help you with technology?',
+            'what technologies do you know about': 'I can discuss AI, machine learning, web development, cloud computing, cybersecurity, and more!',
+            'tell me about ai': 'AI (Artificial Intelligence) involves creating systems that can perform tasks requiring human intelligence, like learning, problem-solving, and decision-making.',
+            'how do i code better': 'Practice regularly, read other people\'s code, learn design patterns, write clean and readable code, and don\'t be afraid to refactor!',
+            'what is machine learning': 'Machine learning is a subset of AI that enables systems to learn and improve from experience without explicit programming.',
+            'cloud computing': 'Cloud computing delivers computing services over the internet, offering faster innovation, flexible resources, and economies of scale.',
+            'thank you': 'You\'re welcome! Always happy to help with technology questions.',
+            'bye': 'Goodbye! Remember to keep your software updated!',
+            'default': "I'm not sure I understand. Could you ask about technology, programming, AI, or something related?"
+        };
+        
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+        
+        function sendSuggestion(text) {
+            userInput.value = text;
+            sendMessage();
+        }
+        
+        function sendMessage() {
+            const message = userInput.value.trim();
+            if (message === '') return;
+            
+            // Add user message to chat
+            addMessage(message, 'user');
+            userInput.value = '';
+            
+            // Show typing indicator
+            showTypingIndicator();
+            
+            // Bot response with delay to simulate thinking
+            setTimeout(() => {
+                removeTypingIndicator();
+                const botResponse = generateBotResponse(message);
+                addMessage(botResponse, 'bot');
+            }, 1000 + Math.random() * 1000);
+        }
+        
+        function addMessage(text, sender) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message');
+            messageElement.classList.add(sender + '-message');
+            messageElement.textContent = text;
+            
+            chatMessages.appendChild(messageElement);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        function showTypingIndicator() {
+            const typingElement = document.createElement('div');
+            typingElement.classList.add('typing-indicator');
+            typingElement.id = 'typingIndicator';
+            typingElement.innerHTML = `
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+            `;
+            
+            chatMessages.appendChild(typingElement);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        function removeTypingIndicator() {
+            const typingElement = document.getElementById('typingIndicator');
+            if (typingElement) {
+                typingElement.remove();
+            }
+        }
+        
+        function generateBotResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            // Check for exact matches first
+            for (const key in botResponses) {
+                if (lowerMessage.includes(key)) {
+                    return botResponses[key];
+                }
+            }
+            
+            // Default response if no matches
+            return botResponses['default'];
+        }
+        
+        // Initialize the tech background
+        createTechBackground();
+    </script>
+</body>
+</html>

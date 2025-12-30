@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Web Development Courses</title>
+  <style>
+    :root {
+      --navbar-bg: rgba(255, 255, 255, 0.1);
+      --navbar-border: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Navbar */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 70px;
+      background: var(--navbar-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--navbar-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 30px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      z-index: 10000;
+    }
+
+    nav .logo {
+      font-weight: 900;
+      font-size: 1.6rem;
+      color: #000000;
+      user-select: none;
+      letter-spacing: 1px;
+      cursor: default;
+    }
+
+    nav .logo img {
+      height: 65px;
+      width: auto;
+      max-width: 250px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      margin: 0;
+      padding: 0;
+      align-items: center;
+    }
+
+    nav ul li {
+      position: relative;
+    }
+
+    nav ul li a {
+      color: #000000;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 10px 18px;
+      border-radius: 20px;
+      transition: all 0.2s ease;
+    }
+
+    nav ul li a:hover,
+    nav ul li a:focus {
+      color: #000000;
+      background: rgba(255, 182, 193, 0.1);
+      outline: none;
+    }
+    body {
+      margin: 0; 
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+      background-size: 400% 400%;
+      animation: gradientShift 12s ease infinite;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 90px;
+      padding-bottom: 40px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      25% { background-position: 100% 50%; }
+      50% { background-position: 100% 100%; }
+      75% { background-position: 0% 100%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    header {
+      font-size: 3rem;
+      margin-bottom: 40px;
+      margin-top: 20px;
+      font-weight: 700;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+      user-select: none;
+      text-align: center;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      cursor: pointer;
+      padding: 30px 20px;
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      user-select: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.1));
+      animation: cardRotate 8s linear infinite;
+      opacity: 0;
+      z-index: 0;
+      border-radius: 50%;
+      transition: opacity 0.4s ease;
+    }
+
+    @keyframes cardRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .card:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .card:hover::before {
+      opacity: 0.1;
+    }
+
+    .card h2 {
+      font-size: 1.6rem;
+      margin-bottom: 15px;
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card p {
+      font-size: 1rem;
+      line-height: 1.4;
+      color: #eee;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card img {
+      width: 90px;
+      height: 90px;
+      margin-bottom: 20px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 5px rgba(255,255,255,0.7));
+      transition: transform 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card:hover img {
+      transform: scale(1.1);
+    }
+
+    footer {
+      margin-top: 60px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+      user-select: none;
+      text-align: center;
+      width: 100%;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding-top: 80px;
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+      
+      nav {
+        padding: 0 20px;
+      }
+      
+      .grid {
+        padding: 0 10px;
+        gap: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        font-size: 2.2rem;
+        margin-bottom: 30px;
+      }
+      
+      .card {
+        padding: 25px 15px;
+      }
+      
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+    }
+.course-btn{
+    display: inline-block;
+    background: #ff523b;
+    color: #fff;
+    padding: 8px 20px;
+    margin: 15px 0 0 0;
+    border-radius: 25px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.3s ease;
+    align-self: center;
+    box-shadow: 0 2px 5px rgba(255, 82, 59, 0.3);
+}
+.course-btn:hover{
+    background: #f9960c;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255, 82, 59, 0.4);
+    color: #fff;
+}
+
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo"><img src="Ximg.png"></div>
+    <ul>
+      <li><a href="index.html" tabindex="1">Home</a></li>
+      <li><a href="aiselect.html" tabindex="2">AI Mode</a></li>
+      <li><a href="courses.html" tabindex="3">Courses</a></li>
+      <li><a href="" tabindex="4"></a></li>
+    </ul>
+  </nav>
+
+
+  <header>WebDevelopment Courses</header>
+
+  <div class="grid">
+    <div class="card">
+      <img src="html.png" alt="Mechanical Engineering Diploma" />
+      <h2>Html</h2>
+      <p>Hyper Text Markup Language.</p>
+<p>  <a href="video.html" class="course-btn">Explore Now</a></p>
+
+    </div>
+
+    <div class="card">
+      <img src="css.png" alt="Civil Engineering Diploma" />
+      <h2>Css</h2>
+      <p>Cascading Style Sheet.</p>
+<p>  <a href="video.html" class="course-btn">Explore Now</a></p>
+
+    </div>
+
+    <div class="card">
+      <img src="js.png" alt="Electrical Engineering Diploma" />
+      <h2>JS</h2>
+      <p>JavaScript.</p>
+<p>  <a href="video.html" class="course-btn">Explore Now</a></p>
+
+    </div>
+
+      <!-----------<div class="card">
+      <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=200&h=200&fit=crop&crop=center" alt="Computer Science Diploma" />
+      <h2>Computer Science</h2>
+      <p>Basic programming, networking, and software development skills.</p>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&h=200&fit=crop&crop=center" alt="Electronics & Communication Diploma" />
+      <h2>Electronics & Communication</h2>
+      <p>Microelectronics, communication systems, and embedded systems.</p>
+    </div>------>
+  </div>
+  <footer>&copy; 2024 Your Institution. All rights reserved.</footer>
+
+</body>
+</html>

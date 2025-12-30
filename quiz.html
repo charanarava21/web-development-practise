@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Python Quiz Certification</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+body{
+    margin:0;
+    min-height:100vh;
+    background:linear-gradient(135deg,#667eea,#764ba2);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+.card{
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(10px);
+    border-radius:20px;
+    padding:30px;
+    max-width:900px;
+    width:100%;
+    color:#fff;
+    box-shadow:0 20px 40px rgba(0,0,0,.2);
+    animation:fadeIn 1s ease;
+}
+@keyframes fadeIn{
+    from{opacity:0;transform:translateY(20px);}
+    to{opacity:1;transform:translateY(0);}
+}
+h1{
+    text-align:center;
+    margin-bottom:10px;
+}
+.subtitle{
+    text-align:center;
+    opacity:.9;
+    margin-bottom:20px;
+}
+input[type=text]{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    margin-bottom:20px;
+    font-size:16px;
+}
+.progress{
+    height:8px;
+    background:rgba(255,255,255,.3);
+    border-radius:5px;
+    overflow:hidden;
+    margin-bottom:20px;
+}
+.progress-bar{
+    height:100%;
+    width:0%;
+    background:#00ffcc;
+    transition:.4s;
+}
+.question{
+    margin-bottom:18px;
+    padding:15px;
+    border-radius:12px;
+    background:rgba(0,0,0,.2);
+}
+.question p{
+    margin:0 0 10px;
+    font-weight:600;
+}
+label{
+    display:block;
+    padding:6px 0;
+    cursor:pointer;
+}
+button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    font-size:18px;
+    font-weight:600;
+    background:linear-gradient(135deg,#00ffcc,#00c6ff);
+    color:#000;
+    cursor:pointer;
+    transition:.3s;
+}
+button:hover{
+    transform:scale(1.03);
+}
+#result{
+    text-align:center;
+    font-size:20px;
+    margin-top:20px;
+}
+#certificate{
+    display:none;
+    margin-top:30px;
+    background:#fff;
+    color:#000;
+    border-radius:20px;
+    padding:40px;
+    text-align:center;
+    animation:zoomIn .8s ease;
+}
+@keyframes zoomIn{
+    from{transform:scale(.8);opacity:0;}
+    to{transform:scale(1);opacity:1;}
+}
+#certificate h2{
+    font-size:34px;
+    color:#764ba2;
+}
+.cert-name{
+    font-size:28px;
+    font-weight:700;
+    margin:10px 0;
+}
+.cert-footer{
+    margin-top:30px;
+    font-weight:600;
+}
+.download-btn{
+    margin-top:20px;
+    background:#764ba2;
+    color:#fff;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+<h1> Python Skill Test</h1>
+<p class="subtitle">Score 75% or more to earn your certificate</p>
+
+<input type="text" id="username" placeholder="Enter your full name">
+
+<div class="progress">
+    <div class="progress-bar" id="progressBar"></div>
+</div>
+
+<form id="quizForm">
+
+<!-- QUESTIONS -->
+<script>
+const questions = [
+["What is the output of type(5)?",["int","float","str"],0],
+["Keyword to define function?",["func","define","def"],2],
+["Immutable datatype?",["list","tuple","dict"],1],
+["Exponent operator?",["^","**","//"],1],
+["len() is used for?",["Counting","Deleting","Sorting"],0],
+["Output of 10//3?",["3","3.3","4"],0],
+["Loop for fixed iterations?",["while","for","do-while"],1],
+["Exception handling keyword?",["try","except","catch"],1],
+["Python file extension?",[".pt",".python",".py"],2],
+["User input function?",["scan()","input()","read()"],1]
+];
+
+let quizHTML="";
+questions.forEach((q,i)=>{
+    quizHTML+=`
+    <div class="question">
+    <p>${i+1}. ${q[0]}</p>
+    ${q[1].map((opt,j)=>`
+        <label>
+        <input type="radio" name="q${i}" value="${j}" onclick="updateProgress()"> ${opt}
+        </label>
+    `).join("")}
+    </div>`;
+});
+document.write(quizHTML);
+</script>
+
+<button type="button" onclick="submitQuiz()">Submit Test</button>
+</form>
+
+<div id="result"></div>
+
+<div id="certificate">
+    <h2>Certificate of Achievement</h2>
+    <p>This certifies that</p>
+    <div class="cert-name" id="certName"></div>
+    <p>has successfully passed the Python Skill Test</p>
+    <p><b>Score:</b> <span id="certScore"></span>%</p>
+    <div class="cert-footer">XploreonEdu • Online Learning</div>
+    <button class="download-btn" onclick="downloadCertificate()">Download Certificate</button>
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+<script>
+function updateProgress(){
+    let answered=document.querySelectorAll('input[type=radio]:checked').length;
+    document.getElementById("progressBar").style.width=(answered/10)*100+"%";
+}
+
+function submitQuiz(){
+    let name=document.getElementById("username").value;
+    if(!name){alert("Please enter your name");return;}
+
+    let score=0;
+    for(let i=0;i<10;i++){
+        let selected=document.querySelector(`input[name="q${i}"]:checked`);
+        if(!selected){alert("Please answer all questions");return;}
+        if(parseInt(selected.value)===questions[i][2]) score++;
+    }
+
+    let percent=(score/10)*100;
+    document.getElementById("result").innerText=`Your Score: ${percent}%`;
+
+    if(percent>=75){
+        document.getElementById("certificate").style.display="block";
+        document.getElementById("certName").innerText=name;
+        document.getElementById("certScore").innerText=percent;
+    }else{
+        alert("You need at least 75% to get certificate");
+    }
+}
+
+function downloadCertificate(){
+    html2canvas(document.getElementById("certificate")).then(canvas=>{
+        let a=document.createElement("a");
+        a.download="Python_Certificate.png";
+        a.href=canvas.toDataURL();
+        a.click();
+    });
+}
+</script>
+
+</body>
+</html>

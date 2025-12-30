@@ -1,0 +1,80 @@
+/* Header Image Styles for col-23 */
+.col-23 {
+    flex-basis: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.col-23 img {
+    max-width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: contain;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+
+.col-23 img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design for Header Image */
+@media (max-width: 768px) {
+    .col-23 {
+        flex-basis: 100%;
+        order: 2;
+        margin-top: 20px;
+    }
+    
+    .col-23 img {
+        max-height: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .col-23 {
+        padding: 10px;
+    }
+    
+    .col-23 img {
+        max-height: 250px;
+    }
+}
+
+/* Ensure the header row layout works properly */
+.header .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.header .col-2 {
+    flex-basis: 45%;
+    min-width: 300px;
+}
+
+/* Animation for the header image */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.col-23 img {
+    animation: float 3s ease-in-out infinite;
+}
+
+.col-23 img:hover {
+    animation: none;
+    transform: scale(1.05);
+}

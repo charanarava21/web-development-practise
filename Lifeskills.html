@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Life Skills</title>
+  <style>
+    :root {
+      --navbar-bg: rgba(255, 255, 255, 0.95);
+      --navbar-border: rgba(255, 255, 255, 0.2);
+    }
+       /* Navbar */
+       nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 70px;
+      background: var(--navbar-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--navbar-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 30px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      z-index: 10000;
+    }
+
+    nav .logo {
+      font-weight: 900;
+      font-size: 1.6rem;
+      color: #000000;
+      user-select: none;
+      letter-spacing: 1px;
+      cursor: default;
+    }
+
+    nav .logo img {
+      height: 65px;
+      width: auto;
+      max-width: 250px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      margin: 0;
+      padding: 0;
+      align-items: center;
+    }
+
+    nav ul li {
+      position: relative;
+    }
+
+    nav ul li a {
+      color: #000000;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 10px 18px;
+      border-radius: 20px;
+      transition: all 0.2s ease;
+    }
+
+    nav ul li a:hover,
+    nav ul li a:focus {
+      color: #000000;
+      background: rgba(255, 182, 193, 0.1);
+      outline: none;
+    }
+
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #3a6186, #89253e);
+      background-size: 300% 300%;
+      animation: lifeskillsShift 18s ease infinite;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      transition: background 0.8s ease;
+    }
+
+    @keyframes lifeskillsShift {
+      0% { background-position: 0% 50%; }
+      25% { background-position: 100% 50%; }
+      50% { background-position: 100% 100%; }
+      75% { background-position: 0% 100%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Course-specific background colors - Light and Dynamic */
+    .communication-bg {
+      background: linear-gradient(135deg, #74b9ff, #0984e3) !important;
+      background-size: 300% 300%;
+      animation: lifeskillsShift 18s ease infinite;
+    }
+
+    .problem-solving-bg {
+      background: linear-gradient(135deg, #fd79a8, #e84393) !important;
+      background-size: 300% 300%;
+      animation: lifeskillsShift 18s ease infinite;
+    }
+
+    .teamwork-bg {
+      background: linear-gradient(135deg, #55efc4, #00b894) !important;
+      background-size: 300% 300%;
+      animation: lifeskillsShift 18s ease infinite;
+    }
+
+    .financial-bg {
+      background: linear-gradient(135deg, #fdcb6e, #e17055) !important;
+      background-size: 300% 300%;
+      animation: lifeskillsShift 18s ease infinite;
+    }
+
+    .emotional-bg {
+      background: linear-gradient(135deg, #a29bfe, #6c5ce7) !important;
+      background-size: 300% 300%;
+      animation: lifeskillsShift 18s ease infinite;
+    }
+
+    .time-management-bg {
+      background: linear-gradient(135deg, #81ecec, #00cec9) !important;
+      background-size: 300% 300%;
+      animation: lifeskillsShift 18s ease infinite;
+    }
+
+    header {
+      font-size: 3rem;
+      margin-bottom: 40px;
+      font-weight: 700;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+      user-select: none;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      width: 100%;
+      max-width: 1100px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      cursor: pointer;
+      padding: 30px 20px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+    }
+
+    .card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 20px 40px rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .card h2 {
+      font-size: 1.6rem;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    .card p {
+      font-size: 1rem;
+      line-height: 1.4;
+      color: #eee;
+    }
+
+    .card img {
+      width: 90px;
+      height: 90px;
+      margin-bottom: 20px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 5px rgba(255,255,255,0.7));
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover img {
+      transform: scale(1.1);
+    }
+
+    footer {
+      margin-top: 60px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+      user-select: none;
+    }
+
+    @media (max-width: 480px) {
+      header {
+        font-size: 2.2rem;
+      }
+      .card {
+        padding: 25px 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo"><img src="Ximg.png"></div>
+    <ul>
+      <li><a href="index.html" tabindex="1">Home</a></li>
+      <li><a href="aiselect.html" tabindex="2">AI Mode</a></li>
+      <li><a href="courses.html" tabindex="3">Courses</a></li>
+      <li><a href="" tabindex="4"></a></li>
+    </ul>
+  </nav>
+
+  <header>  <br>Life Skills</header>
+
+  <div class="grid">
+    <div class="card" id="communication-card" onclick="changeBackground('communication')">
+      <img src="https://img.icons8.com/color/96/communication.png" alt="Communication Skills" />
+      <h2>Communication Skills</h2>
+      <p>Effective speaking, listening, and presentation abilities.</p>
+    </div>
+
+    <div class="card" id="problem-solving-card" onclick="changeBackground('problem-solving')">
+      <img src="https://img.icons8.com/color/96/puzzle.png" alt="Problem Solving" />
+      <h2>Problem Solving</h2>
+      <p>Critical thinking and creative approaches to challenges.</p>
+    </div>
+
+    <div class="card" id="teamwork-card" onclick="changeBackground('teamwork')">
+      <img src="https://img.icons8.com/color/96/teamwork.png" alt="Teamwork" />
+      <h2>Teamwork</h2>
+      <p>Collaboration, cooperation, and leadership in groups.</p>
+    </div>
+
+    <div class="card" id="financial-card" onclick="changeBackground('financial')">
+      <img src="https://img.icons8.com/color/96/money.png" alt="Financial Literacy" />
+      <h2>Financial Literacy</h2>
+      <p>Budgeting, saving, and managing money smartly.</p>
+    </div>
+
+    <div class="card" id="emotional-card" onclick="changeBackground('emotional')">
+      <img src="https://img.icons8.com/color/96/brain.png" alt="Emotional Intelligence" />
+      <h2>Emotional Intelligence</h2>
+      <p>Managing emotions, empathy, and interpersonal skills.</p>
+    </div>
+
+    <div class="card" id="time-management-card" onclick="changeBackground('time-management')">
+      <img src="https://img.icons8.com/color/96/time.png" alt="Time Management" />
+      <h2>Time Management</h2>
+      <p>Prioritizing tasks and balancing work efficiently.</p>
+    </div>
+  </div>
+
+  <footer>&copy; 2024 Your Institution. All rights reserved.</footer>
+
+  <script>
+    // Randomize the animated gradient on initial load to make this page dynamic
+    (function() {
+      var palettes = [
+        'linear-gradient(135deg, #3a6186, #89253e)',
+        'linear-gradient(135deg, #1e3c72, #2a5298)',
+        'linear-gradient(135deg, #b24592, #f15f79)',
+        'linear-gradient(135deg, #ff9966, #ff5e62)'
+      ];
+      var chosen = palettes[Math.floor(Math.random() * palettes.length)];
+      document.body.style.background = chosen;
+    })();
+
+    function changeBackground(courseType) {
+      // Remove all existing background classes
+      document.body.classList.remove(
+        'communication-bg',
+        'problem-solving-bg',
+        'teamwork-bg',
+        'financial-bg',
+        'emotional-bg',
+        'time-management-bg'
+      );
+      
+      // Add the new background class based on course type
+      switch(courseType) {
+        case 'communication':
+          document.body.classList.add('communication-bg');
+          break;
+        case 'problem-solving':
+          document.body.classList.add('problem-solving-bg');
+          break;
+        case 'teamwork':
+          document.body.classList.add('teamwork-bg');
+          break;
+        case 'financial':
+          document.body.classList.add('financial-bg');
+          break;
+        case 'emotional':
+          document.body.classList.add('emotional-bg');
+          break;
+        case 'time-management':
+          document.body.classList.add('time-management-bg');
+          break;
+        default:
+          // Reset to default background
+          break;
+      }
+    }
+  </script>
+
+</body>
+</html>

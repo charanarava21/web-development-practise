@@ -1,0 +1,239 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Python Course</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="cource.css">
+    <link rel="stylesheet" href="offer.css">
+    <link rel="stylesheet" href="header-image.css">
+    <link rel="stylesheet" href="testimonial.css">
+    <link rel="stylesheet" href="animations.css">
+     </head>
+<style>
+.btn{
+    display: inline-block;
+    background: #ff523b;
+    color: #fff;
+    padding: 8px 20px;
+    margin: 15px 0 0 0;
+    border-radius: 25px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.3s ease;
+    align-self: center;
+    box-shadow: 0 2px 5px rgba(255, 82, 59, 0.3);
+}
+
+ body {   
+      background: linear-gradient(135deg, #3a6186, #89253e);
+    }
+.header{
+    min-height: 100vh;
+    width:100%;
+    background-image:linear-gradient(rgba(4,9,30,0.7),rgba(4,9,30,0.7)),url('banner.png');
+    background-position: center;
+    background-size: cover;
+    position: relative;
+
+}
+
+.nav-bar{
+  flex:1;
+  text-align: right;
+  margin-left: 390px;
+}
+h1 {
+    text-align: center;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+}
+
+details {
+    background: #fff;
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+summary {
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.day {
+    margin-top: 10px;
+    padding: 8px;
+    background: #eef2f5;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.day:hover {
+    background: #dfe6ec;
+}
+
+#videoSection {
+    display: none;
+    margin-top: 30px;
+    text-align: center;
+}
+
+video {
+    width: 100%;
+    max-width: 800px;
+}
+</style>
+
+<body>
+
+      <div class="container">
+             <div class="navbar">
+                <div class="logo">
+                  <a href="index.html"><img src="Ximg.png"width="125px"></a>
+                </div>
+                     <nav>
+                    <ul id="MenuItems">
+                    <li><a href="index.html" style="color: black; font-weight: bold; text-decoration: none;">Home</a></li>
+                <li><a href="courses.html" style="color: black; font-weight: bold; text-decoration: none;">Courses</a></li>
+                   <li><a href="aiselect.html" style="color: black; font-weight: bold; text-decoration: none;">AI MODE</a></li>
+                   <li><a href="ac.html" style="color: black; font-weight: bold; text-decoration: none;">About/contact</a></li>
+                   <li><a href="at.html" style="color: black; font-weight: bold; text-decoration: none;">Account</a></li>
+                 </ul>
+                </nav>
+
+            </div> 
+</div>
+
+
+<h1> Python Programming Mastery</h1><br><hr><br><br>
+
+<div class="container">
+
+<!-- WEEK 1 -->
+<details>
+    <summary>Week 1: Python Foundations & Computational Thinking</summary><br><br>
+    <div class="day" onclick="playVideo('day1','demo.mp4')">Day 1: Python Overview & Setup</div><br>
+ <!--   <div class="day" onclick="playVideo('day2','demo.mp4')">Day 2: Variables & Data Types</div><br>
+    <div class="day" onclick="playVideo('day3','demo.mp4')">Day 3: Input / Output</div><br>-->
+</details>
+
+<!------ 
+<details>
+    <summary>Week 2: Control Flow & Logic Building</summary>
+    <div class="day" onclick="playVideo('day4.mp4')">Day 1: Conditional Statements</div>
+    <div class="day" onclick="playVideo('day5.mp4')">Day 2: Loops</div>
+</details>
+
+
+<details>
+    <summary>Week 3: Data Structures for Real-World Applications</summary>
+    <div class="day" onclick="playVideo('day6.mp4')">Day 1: Lists & Tuples</div>
+    <div class="day" onclick="playVideo('day7.mp4')">Day 2: Dictionaries</div>
+</details>-->
+
+</div>
+
+<!-- VIDEO PLAYER -->
+<div id="videoSection">
+    <h2>🎬 Lesson Video</h2>
+    <video id="courseVideo" controls controlsList="nodownload noplaybackrate">
+        <source id="videoSource" src="" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+<div id="assignmentSection" style="display:none; margin-top:30px; text-align:center;">
+    <h2>📝 Final Assignment Test</h2>
+    <p style="color: black;">Congratulations! You have completed all lessons.</p>
+   <a href="quiz.html"> <button class="btn" >Start Test</button></a>
+</div>
+
+</div>
+
+
+<script>
+const progress = {
+    "day1": false,
+   // "day2": false,
+   // "day3": false,
+   // "day4": false,
+   // "day5": false,
+    //"day6": false,
+   // "day7": false
+};
+
+let currentDay = null;
+
+const video = document.getElementById("courseVideo");
+const source = document.getElementById("videoSource");
+const videoSection = document.getElementById("videoSection");
+
+let lastAllowedTime = 0;
+
+function playVideo(dayKey, src) {
+
+    // Check previous day completion
+    const dayNumber = parseInt(dayKey.replace("day", ""));
+    if (dayNumber > 1) {
+        const prevDay = "day" + (dayNumber - 1);
+        if (!progress[prevDay]) {
+            alert("⚠️ Please complete " + prevDay.toUpperCase() + " first");
+            return;
+        }
+    }
+
+    currentDay = dayKey;
+    source.src = src;
+    video.load();
+    videoSection.style.display = "block";
+    lastAllowedTime = 0;
+    video.play();
+}
+
+
+// Prevent skipping
+video.addEventListener("timeupdate", () => {
+    if (!video.seeking) {
+        lastAllowedTime = video.currentTime;
+    }
+});
+
+video.addEventListener("seeking", () => {
+    if (video.currentTime > lastAllowedTime + 0.3) {
+        video.currentTime = lastAllowedTime;
+    }
+});
+video.addEventListener("ended", () => {
+    if (currentDay) {
+        progress[currentDay] = true;
+        alert("✅ " + currentDay.toUpperCase() + " completed!");
+        checkCourseCompletion();
+    }
+});
+
+// Disable right click
+video.addEventListener("contextmenu", e => e.preventDefault());
+function checkCourseCompletion() {
+    const allCompleted = Object.values(progress).every(v => v === true);
+
+    if (allCompleted) {
+        document.getElementById("assignmentSection").style.display = "block";
+    }
+}
+function generateCertificate() {
+    alert("🎉 Test Passed!\nYour Certificate is Generated.");
+    // Later: PDF download / backend validation
+}
+
+
+</script>
+
+</body>
+</html>

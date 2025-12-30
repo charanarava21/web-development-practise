@@ -1,0 +1,339 @@
+.course{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding-top: 90px;
+    margin-bottom: 50px;
+}
+.course:first-of-type{
+    padding-top: 90px;
+}
+.course:last-of-type{
+    margin-bottom: 50px;
+}
+.course h1{
+    font-size: 36px;
+    font-weight: 600px;
+}
+.course p{
+ color:#777;
+ font-size: 14px;
+ font-weight: 300px;
+ line-height: 22px;
+ padding: 10px; 
+
+}
+.row{
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.course-col{
+    max-width: 1480px;
+    flex-basis: 48%;
+    background: #fff3f3;
+    border-radius: 10px;
+    margin-bottom: 5%;
+    padding: 30px 25px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border: 1px solid #f0f0f0;
+}
+.course-col34 
+ {
+    flex-basis: 48%;
+    background: #fff3f3;
+    border-radius: 10px;
+    margin-bottom: 5%;
+    padding: 30px 25px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border: 1px solid #f0f0f0;
+ }
+.course-col h3{
+    text-align: center;
+    font-weight: 700;
+    margin: 0 0 20px 0;
+    font-size: 20px;
+    color: #222;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #ff523b;
+    letter-spacing: 1px;
+}
+.course-col34 h3{
+    text-align: center;
+    font-weight: 700;
+    margin: 0 0 20px 0;
+    font-size: 20px;
+    color: #222;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #ff523b;
+    letter-spacing: 1px;
+}
+.course-col p, .course-col34 p{
+    flex: 1;
+    text-align: left;
+    line-height: 2.2;
+    padding: 15px 0;
+    margin: 0;
+    font-size: 15px;
+    color: #444;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+}
+/* Ultra-smooth popup effect for course boxes */
+.course-col, .course-col34 {
+    transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    will-change: transform, box-shadow, opacity;
+    transform-origin: center bottom;
+}
+
+.course-col:hover, .course-col34:hover {
+    box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+    transform: translateY(-18px) scale(1.08);
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    z-index: 10;
+    filter: brightness(1.05);
+}
+
+/* Ultra-smooth hover effects for tooltips */
+.course-col:hover::before, .course-col34:hover::before {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-25px) scale(1.15);
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.course-col:hover::after, .course-col34:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(100%) translateY(-25px);
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Ultra-smooth base transitions */
+.course-col, .course-col34 {
+    transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Ultra-smooth popup animation */
+@keyframes coursePopup {
+    0% {
+        transform: translateY(0) scale(1);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        filter: brightness(1);
+    }
+    20% {
+        transform: translateY(-4px) scale(1.02);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        filter: brightness(1.01);
+    }
+    40% {
+        transform: translateY(-8px) scale(1.04);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        filter: brightness(1.02);
+    }
+    60% {
+        transform: translateY(-12px) scale(1.06);
+        box-shadow: 0 18px 40px rgba(0,0,0,0.18);
+        filter: brightness(1.03);
+    }
+    80% {
+        transform: translateY(-15px) scale(1.07);
+        box-shadow: 0 22px 45px rgba(0,0,0,0.2);
+        filter: brightness(1.04);
+    }
+    100% {
+        transform: translateY(-18px) scale(1.08);
+        box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        filter: brightness(1.05);
+    }
+}
+
+.course-col:hover, .course-col34:hover {
+    animation: coursePopup 1s cubic-bezier(0.23, 1, 0.32, 1);
+}
+/* Ensure both course sections have identical sizing */
+section.course .row {
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+section.course .course-col,
+section.course .course-col34 {
+    max-width: 1480px;
+    flex-basis: 48%;
+    background: #fff3f3;
+    border-radius: 10px;
+    margin-bottom: 5%;
+    padding: 30px 25px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border: 1px solid #f0f0f0;
+}
+.course-btn{
+    display: inline-block;
+    background: #ff523b;
+    color: #fff;
+    padding: 8px 20px;
+    margin: 15px 0 0 0;
+    border-radius: 25px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.3s ease;
+    align-self: center;
+    box-shadow: 0 2px 5px rgba(255, 82, 59, 0.3);
+}
+.course-btn:hover{
+    background: #f9960c;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255, 82, 59, 0.4);
+    color: #fff;
+}
+
+/* Enhanced popup tooltip styles for course cards */
+.course-col, .course-col34 {
+    position: relative;
+    cursor: pointer;
+    overflow: visible;
+    transition: all 0.3s ease;
+}
+
+/* Ensure popup effect is always active */
+.course-col:hover, .course-col34:hover {
+    transform: translateY(-15px) scale(1.05) !important;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3) !important;
+    z-index: 999 !important;
+}
+
+.course-col::before, .course-col34::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px 25px;
+    border-radius: 15px;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    z-index: 1000;
+    box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+    max-width: 350px;
+    white-space: normal;
+    text-align: left;
+    line-height: 1.6;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    will-change: transform, opacity, visibility;
+    transform-origin: center bottom;
+}
+
+.course-col::after, .course-col34::after {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(100%);
+    border: 8px solid transparent;
+    border-top-color: #667eea;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    z-index: 1000;
+    will-change: transform, opacity, visibility;
+    transform-origin: center top;
+}
+
+.course-col:hover::before, .course-col34:hover::before {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-25px) scale(1.15);
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.course-col:hover::after, .course-col34:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(100%) translateY(-25px);
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Additional popup content styles */
+.course-col:hover, .course-col34:hover {
+    z-index: 999;
+}
+
+/* Enhanced popup with additional information */
+.course-col[data-details]::before, .course-col34[data-details]::before {
+    content: attr(data-tooltip) "\A\A" attr(data-details);
+    white-space: pre-line;
+    text-align: left;
+    font-size: 13px;
+    line-height: 1.5;
+    max-width: 400px;
+    padding: 25px 30px;
+}
+
+/* Popup animation keyframes */
+@keyframes popupSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-30px) scale(0.8);
+    }
+    50% {
+        opacity: 0.8;
+        transform: translateX(-50%) translateY(-20px) scale(1.02);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(-15px) scale(1.05);
+    }
+}
+
+.course-col:hover::before, .course-col34:hover::before {
+    animation: popupSlideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Responsive popup */
+@media (max-width: 768px) {
+    .course-col::before, .course-col34::before {
+        max-width: 280px;
+        font-size: 12px;
+        padding: 15px 20px;
+    }
+    
+    .course-col[data-details]::before, .course-col34[data-details]::before {
+        max-width: 300px;
+        font-size: 11px;
+    }
+}
